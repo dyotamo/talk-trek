@@ -15,5 +15,7 @@ void main() async {
   await GetStorage.init();
   final box = GetStorage();
   final username = box.read<String>('username');
+
+  // Run app.
   runApp(TalkTrekApp(username));
 }
