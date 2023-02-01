@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:slugify/slugify.dart';
 import 'package:talk_trek/screens/chat.dart';
 import 'package:talk_trek/utils.dart' as utils;
@@ -55,8 +55,8 @@ class SelectUserScreen extends StatelessWidget {
             content:
                 Text('$username não é um nickname permitido no aplicativo.')));
       } else {
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString('username', username);
+        final box = GetStorage();
+        box.write('username', username);
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
           context,

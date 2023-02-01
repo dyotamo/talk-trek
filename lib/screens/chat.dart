@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:talk_trek/model.dart';
 import 'package:talk_trek/screens/select_user.dart';
 import 'package:talk_trek/utils.dart' as utils;
@@ -238,8 +238,8 @@ class TalkDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Trocar nickname'),
             onTap: () async {
-              final prefs = await SharedPreferences.getInstance();
-              await prefs.remove('username');
+              final box = GetStorage();
+              await box.remove('username');
               // ignore: use_build_context_synchronously
               Navigator.pushAndRemoveUntil(
                 context,
