@@ -29,3 +29,9 @@ Color getColor(String username) {
 
   return color;
 }
+
+extension StringExtension on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
+}

@@ -93,13 +93,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   onPressed: _getDownList,
                 ),
               Container(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         child: TextField(
                           controller: _textController,
                           decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
                             hintText: 'Escreva uma mensagem aqui...',
                           ),
                           onSubmitted: (value) => _addMessage(context),
@@ -138,7 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         child: Center(
           child: Text(
-            message.username[0].toUpperCase(),
+            message.username.substring(0, 2).capitalize(),
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -199,36 +200,17 @@ class TalkDrawer extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Container(
-                    width: 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        _username[0].toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 Text(
-                  _username,
+                  'Olá, $_username!',
                   style: const TextStyle(
-                    fontSize: 28.0,
+                    fontSize: 30.0,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -258,13 +240,7 @@ class TalkDrawer extends StatelessWidget {
                       applicationName: 'Talk Trek',
                       applicationVersion: '1.0.0',
                       applicationLegalese:
-                          'Copyright ${DateTime.now().year} - Mister Mxyzptlk SA.',
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.only(top: 24.0),
-                          child: Text('Converse com amigos (y)'),
-                        ),
-                      ],
+                          'Mister Mxyzptlk SA. - ${DateTime.now().year}',
                     )),
           )
         ],

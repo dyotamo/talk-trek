@@ -19,11 +19,12 @@ class SelectUserScreen extends StatelessWidget {
           children: [
             const Text('Introduza o seu nickname:'),
             Container(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: <Widget>[
                     Expanded(
                       child: TextField(
+                        textCapitalization: TextCapitalization.words,
                         textAlign: TextAlign.center,
                         controller: _textController,
                         onSubmitted: (value) => _login(context),
@@ -50,22 +51,30 @@ class SelectUserScreen extends StatelessWidget {
     var text = _textController.text;
     if (text.isNotEmpty) {
       var username = slugify(text);
+      if (text.length <= 2) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+                '$username é um nickname muito curto (o tamanho deve ser maior que 2).')));
+        return;
+      }
+
       if (username.toLowerCase() == utils.forbiddenNickname) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content:
                 Text('$username não é um nickname permitido no aplicativo.')));
-      } else {
-        final box = GetStorage();
-        box.write('username', username);
-        // ignore: use_build_context_synchronously
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return ChatScreen(username);
-          }),
-          (route) => false,
-        );
+        return;
       }
+
+      final box = GetStorage();
+      box.write('username', username);
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return ChatScreen(username);
+        }),
+        (route) => false,
+      );
     }
   }
 }
