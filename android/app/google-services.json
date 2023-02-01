@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "405457746177",
+    "project_id": "talk-trek",
+    "storage_bucket": "talk-trek.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405457746177:android:6f559a92f8c58a3ba30300",
+        "android_client_info": {
+          "package_name": "com.example.talk_trek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405457746177-67utucmfrsmnmd2c9trvpbf02djhps3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUgwEW1er1w-rV89ul5WTasGQqbhm7hqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405457746177-67utucmfrsmnmd2c9trvpbf02djhps3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
