@@ -171,8 +171,11 @@ class _ChatScreenState extends State<ChatScreen> {
       _db
           .collection('messages')
           .doc()
-          .set(
-              Message(widget._username, message, Timestamp.now()).toFirestore())
+          .set(Message(
+            username: widget._username,
+            message: message,
+            datetime: Timestamp.now(),
+          ).toFirestore())
           .onError((e, _) => ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                   content: Text('Algum erro ocorreu ao enviar a mensagem.'))));
