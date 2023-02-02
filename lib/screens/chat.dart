@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -126,41 +127,37 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  ListTile _talkListTile(Message message) {
+  Widget _talkListTile(Message message) {
     var userColor = utils.getColor(message.username);
-    return ListTile(
-      onLongPress: () {},
-      leading: Container(
-        width: 40.0,
-        height: 40.0,
-        decoration: BoxDecoration(
-          color: userColor,
-          shape: BoxShape.circle,
-        ),
-        child: Center(
-          child: Text(
-            message.username.substring(0, 2).capitalize(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          if (!_isSender(message))
+            Row(children: [
+              Text(
+                _isSender(message) ? 'eu' : message.username,
+                style: TextStyle(color: userColor, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                  ' (${timeago.format(message.datetime.toDate(), locale: "pt_br")})',
+                  style: const TextStyle(fontSize: 12))
+            ]),
+          BubbleSpecialOne(
+            text: message.message,
+            color: _isSender(message)
+                ? const Color(0xFF1B97F3)
+                : const Color(0xFFE8E8EE),
+            tail: false,
+            textStyle: TextStyle(
+              color: _isSender(message) ? Colors.white : Colors.black,
             ),
+            isSender: _isSender(message),
+            sent: _isSender(message),
           ),
-        ),
+        ],
       ),
-      title: Row(children: [
-        Text(
-          widget._username == message.username ? 'eu' : message.username,
-          style: TextStyle(color: userColor, fontWeight: FontWeight.bold),
-        ),
-        Text(
-            " (${timeago.format(
-              message.datetime.toDate(),
-              locale: 'pt_br',
-            )})",
-            style: const TextStyle(fontSize: 12))
-      ]),
-      subtitle: Text(message.message),
     );
   }
 
@@ -190,6 +187,8 @@ class _ChatScreenState extends State<ChatScreen> {
       duration: const Duration(milliseconds: 300),
     );
   }
+
+  bool _isSender(Message message) => widget._username == message.username;
 }
 
 class TalkDrawer extends StatelessWidget {

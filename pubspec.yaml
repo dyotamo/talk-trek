@@ -39,6 +39,7 @@ dependencies:
   timeago: ^3.3.0
   slugify: ^2.0.0
   get_storage: ^2.0.3
+  chat_bubbles: ^1.4.0
 
 dev_dependencies:
   flutter_test:
